@@ -1,9 +1,9 @@
 "use strict";
 
 /* ClearLooks Scrollbars for Firefox 98+ *************************************
- based on  Aris-t2 / CustomJSforFx
+ based on Aris-t2 / CustomJSforFx
  customized to resemble ClearLooks Gtk theme
- 'method 1' or 'method 2' is required to load custom js in FF
+ 'method 1' or 'method 2' is required to load custom js in Firefox
  STARTUP CACHE HAS TO BE DELETED AFTER EVERY CHANGE!
  'widget.non-native-theme.gtk.scrollbar.allow-buttons' needs to be true
  'always show scrollbars' setting should be true
@@ -14,16 +14,18 @@ var cs_border_color = "#919191";
 var cs_border_radius = 3; // in px
 var cs_background_color = "#d6d4d2";
 var cs_corner_color = "#e8e7e5";
-var cs_thumb_image_vertical = "url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAHCAYAAADAp4fuAAAABmJLR0QA0gDQAM1iKhx7AAAAE0lEQVQI12PMyMj4z0A2YKSBdgAcjQapTdHPDQAAAABJRU5ErkJggg==)";
-var cs_thumb_image_horizontal = "url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAcAAAAFCAYAAACJmvbYAAAABmJLR0QA0gDQAM1iKhx7AAAAF0lEQVQI12PIyMj4zwAF6GwmBjyARpIAY3cGrpIVY6kAAAAASUVORK5CYII=)";
+var cs_width = 14;
+var cs_button_length = 14;
+var cs_thumb_image_vertical = "url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAYAAAAHCAYAAAArkDztAAAABmJLR0QA/wD/AP+gvaeTAAAAG0lEQVQI12PMyMhoY2BgqGRABe0MJANGOhgFAPm5CD5Gino4AAAAAElFTkSuQmCC)";
+var cs_thumb_image_horizontal = "url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAcAAAAGCAYAAAAPDoR2AAAABmJLR0QA/wD/AP+gvaeTAAAAJUlEQVQI12PIyMhoY4ACdDYTAwNDJQMCoLCZGPAAyiTbkfgobAAQ6AhFazuzRQAAAABJRU5ErkJggg==)";
 var cs_gradient_vertical = "linear-gradient(to right,#e8e8e8 0%,#dfdfdf 49%,#d9d9d9 50%,#cdcdcd 100%)";
 var cs_gradient_horizontal = "linear-gradient(to bottom,#e8e8e8 0%,#dfdfdf 49%,#d9d9d9 50%,#cdcdcd 100%)";
 var cs_gradient_vertical_hover = "linear-gradient(to right,#f1f1f1 0%,#e8e8e8 49%,#e1e1e1 50%,#d5d5d5 100%)";
 var cs_gradient_horizontal_hover = "linear-gradient(to bottom,#f1f1f1 0%,#e8e8e8 49%,#e1e1e1 50%,#d5d5d5 100%)";
-var cs_button_image_vertical_increment = "url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAkAAAAGCAYAAAARx7TFAAAABmJLR0QA/wD/AP+gvaeTAAAASklEQVQI12NgIAIwZmRkTGJgYMjFo2Yy85kzZ7abmJgIMzAwmGNTMGPGjDxmBgYGBhwKJ8+YMSOPgYGBgRkmgqYQrgArgLoRBQAAjY8Y/T1NIZAAAAAASUVORK5CYII=)";
-var cs_button_image_vertical_decrement = "url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAkAAAAGCAYAAAARx7TFAAAABmJLR0QA/wD/AP+gvaeTAAAANklEQVQI12NgQAMZGRmT0MWYsSjINTExET5z5sx2DEUwBVCuObJCZiwKGNAVMuJQgAwmMxADABuOFxB2QLckAAAAAElFTkSuQmCC)";
-var cs_button_image_horizontal_increment = "url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAYAAAAJCAYAAAARml2dAAAABmJLR0QA/wD/AP+gvaeTAAAAQElEQVQI122PMQ4AIAjEGuJjb9HH6MJzXQxRpAvkGiAAIGmSsFN7lnb1j7S0IWTjp0v6JgCWuw+rwnwjwqD6YwNk8hRKHk2fVAAAAABJRU5ErkJggg==)";
-var cs_button_image_horizontal_decrement = "url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAYAAAAJCAYAAAARml2dAAAABmJLR0QA/wD/AP+gvaeTAAAAPUlEQVQI13XPsQ3AMAwDwYOmVRMPkzQaN50R2wrLfxAE2ZKZN0QDr0V84RQ7hOggRFUNPIeATs7xv+bx4wUCbRTa4Njj+gAAAABJRU5ErkJggg==)";
+var cs_button_image_vertical_increment = "url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAECAYAAACzzX7wAAAABmJLR0QA/wD/AP+gvaeTAAAAP0lEQVQI12PMyMhoY2BgqGTADtqZz5w5s9fExISdgYHBFl1yxowZVcwMDAwMWBS1z5gxowrDvIyMjDaolXAAACSoE9YP5UYKAAAAAElFTkSuQmCC)";
+var cs_button_image_vertical_decrement = "url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAECAYAAACzzX7wAAAABmJLR0QA/wD/AP+gvaeTAAAANklEQVQI12NgQAIZGRltGRkZbchizMiSDAwMlQwMDLYmJibsZ86c2QtXgCQJA3BFjFgkkUE7ANHGErJw43TbAAAAAElFTkSuQmCC)";
+var cs_button_image_horizontal_increment = "url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAICAYAAADeM14FAAAABmJLR0QA/wD/AP+gvaeTAAAAOElEQVQI112NwQkAMAwCj9BhXSEdoF0h4/ZTgsSPeCgi6WAKIB3G94bL2impG8wJwK2qHR4AmLcP72wPPBuoojIAAAAASUVORK5CYII=)";
+var cs_button_image_horizontal_decrement = "url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAICAYAAADeM14FAAAABmJLR0QA/wD/AP+gvaeTAAAAPUlEQVQI113KsQ2AQAzAwAspWCgt+2QFFmArNvihqF6KcGfLDLr7iSm4YwrEFDj8yLXWW1UnLkiYMfe64weHExQ4Szh5VwAAAABJRU5ErkJggg==)";
 
 /****************************************************************************/
 
@@ -91,12 +93,12 @@ scrollbar thumb[orient="horizontal"]:hover, scrollbar thumb[orient="horizontal"]
 }\
 \
 scrollbar[orient="vertical"] scrollbarbutton {\
-  min-width: 15px !important;\
-  width: 15px !important;\
-  max-width: 15px !important;\
-  min-height: 15px !important;\
-  height: 15px !important;\
-  max-height: 15px !important;\
+  min-width: '+cs_width+'px !important;\
+  width: '+cs_width+'px !important;\
+  max-width: '+cs_width+'px !important;\
+  min-height: '+cs_button_length+'px !important;\
+  height: '+cs_button_length+'px !important;\
+  max-height: '+cs_button_length+'px !important;\
 }\
 scrollbar[orient="vertical"] scrollbarbutton[type="decrement"] {\
   background-image: '+cs_button_image_vertical_decrement+','+cs_gradient_vertical+' !important;\
@@ -123,12 +125,12 @@ scrollbar[orient="vertical"] scrollbarbutton[type="increment"]:hover {\
   background-image: '+cs_button_image_vertical_increment+','+cs_gradient_vertical_hover+' !important;\
 }\
 scrollbar[orient="horizontal"] scrollbarbutton {\
-  min-width: 15px !important;\
-  width: 15px !important;\
-  max-width: 15px !important;\
-  min-height: 15px !important;\
-  height: 15px !important;\
-  max-height: 15px !important;\
+  min-width: '+cs_button_length+'px !important;\
+  width: '+cs_button_length+'px !important;\
+  max-width: '+cs_button_length+'px !important;\
+  min-height: '+cs_width+'px !important;\
+  height: '+cs_width+'px !important;\
+  max-height: '+cs_width+'px !important;\
 }\
 scrollbar[orient="horizontal"] scrollbarbutton[type="decrement"] {\
   background-image: '+cs_button_image_horizontal_decrement+','+cs_gradient_horizontal+' !important;\
