@@ -2,6 +2,8 @@
 
 Custom JS that styles Scrollbars in Firefox to resemble a grey ClearLooks Gtk theme.
 
+![preview](/scrollbar.png?raw=true)
+
 Extra steps are necessary to get Firefox to load custom JS, e.g. methods 1 or 2
 documented at [https://github.com/Aris-t2/CustomJSforFx](https://github.com/Aris-t2/CustomJSforFx).
 
