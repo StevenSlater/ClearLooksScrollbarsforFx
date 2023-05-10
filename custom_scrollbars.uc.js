@@ -15,6 +15,7 @@ var cs_border_radius = 3; // in px
 var cs_background_color = "#d6d4d2";
 var cs_corner_color = "#e8e7e5";
 var cs_width = 14;
+var cs_min_thumb_size = 16;
 var cs_button_length = 14;
 var cs_thumb_image_vertical = "url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAYAAAAHCAYAAAArkDztAAAABmJLR0QA/wD/AP+gvaeTAAAAG0lEQVQI12PMyMhoY2BgqGRABe0MJANGOhgFAPm5CD5Gino4AAAAAElFTkSuQmCC)";
 var cs_thumb_image_horizontal = "url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAcAAAAGCAYAAAAPDoR2AAAABmJLR0QA/wD/AP+gvaeTAAAAJUlEQVQI12PIyMhoY4ACdDYTAwNDJQMCoLCZGPAAyiTbkfgobAAQ6AhFazuzRQAAAABJRU5ErkJggg==)";
@@ -35,36 +36,41 @@ var ss =  Components.classes["@mozilla.org/content/style-sheet-service;1"].getSe
 var uri = Services.io.newURI("data:text/css;charset=utf-8," + encodeURIComponent('\
 @namespace html url("http://www.w3.org/1999/xhtml");\
 \
-scrollbar, scrollcorner, scrollbar thumb, scrollbar scrollbarbutton {\
+scrollbar slider, scrollcorner, scrollbar thumb, scrollbar scrollbarbutton {\
   -moz-appearance: none !important;\
 }\
-scrollbar {\
+scrollbar slider {\
   background-color: '+cs_background_color+' !important;\
   border-color: '+cs_border_color+' !important;\
-  border-radius: '+cs_border_radius+'px !important;\
   border-style: solid !important;\
-  border-width: '+cs_border+'px !important;\
+}\
+scrollbar slider[orient="vertical"] {\
+  border-width: 0px '+cs_border+'px !important;\
+}\
+scrollbar slider[orient="horizontal"] {\
+  border-width: '+cs_border+'px 0px !important;\
 }\
 scrollcorner {\
   background-color: '+cs_corner_color+' !important;\
 }\
 scrollbar thumb {\
   border-color: '+cs_border_color+' !important;\
-  border-radius: '+cs_border_radius+'px !important;\
+  border-radius: 1px !important;\
   border-style: solid !important;\
   border-width: 0px !important;\
+  box-shadow: inset 0px 0px 0px '+cs_border+'px '+cs_border_color+' !important;\
 }\
 scrollbar thumb[orient="vertical"] {\
   background-image: '+cs_thumb_image_vertical+','+cs_gradient_vertical+' !important;\
-  background-position: center,left top !important;\
+  background-position: center !important;\
   background-repeat: no-repeat,repeat !important;\
-  border-width: '+cs_border+'px 0px !important;\
+  min-height: '+cs_min_thumb_size+'px !important;\
 }\
 scrollbar thumb[orient="horizontal"] {\
   background-image: '+cs_thumb_image_horizontal+','+cs_gradient_horizontal+' !important;\
-  background-position: center,left top !important;\
+  background-position: center !important;\
   background-repeat: no-repeat,repeat !important;\
-  border-width: 0px '+cs_border+'px !important;\
+  min-width: '+cs_min_thumb_size+'px !important;\
 }\
 \
 '), null, null);
@@ -83,6 +89,9 @@ scrollbar[orient="horizontal"] scrollbarbutton, \
 scrollbar[orient="vertical"] scrollbarbutton:hover,\
 scrollbar[orient="horizontal"] scrollbarbutton:hover {\
   border-radius: 0px !important;\
+  border-style: solid !important;\
+  border-width: 0px !important;\
+  box-shadow: inset 0px 0px 0px '+cs_border+'px '+cs_border_color+' !important;\
 }\
 \
 scrollbar thumb[orient="vertical"]:hover, scrollbar thumb[orient="vertical"]:active {\
@@ -102,24 +111,18 @@ scrollbar[orient="vertical"] scrollbarbutton {\
 }\
 scrollbar[orient="vertical"] scrollbarbutton[type="decrement"] {\
   background-image: '+cs_button_image_vertical_decrement+','+cs_gradient_vertical+' !important;\
-  background-position: center,left top !important;\
+  background-position: center !important;\
   background-repeat: no-repeat,repeat !important;\
-  border-color: '+cs_border_color+' !important;\
-  border-radius: 0px !important;\
-  border-style: solid !important;\
-  border-width: 0px 0px '+cs_border+'px 0px !important;\
+  border-radius: '+cs_border_radius+'px '+cs_border_radius+'px 0px 0px !important;\
 }\
 scrollbar[orient="vertical"] scrollbarbutton[type="decrement"]:hover {\
   background-image: '+cs_button_image_vertical_decrement+','+cs_gradient_vertical_hover+' !important;\
 }\
 scrollbar[orient="vertical"] scrollbarbutton[type="increment"] {\
   background-image: '+cs_button_image_vertical_increment+','+cs_gradient_vertical+' !important;\
-  background-position: center,left top !important;\
+  background-position: center !important;\
   background-repeat: no-repeat,repeat !important;\
-  border-color: '+cs_border_color+' !important;\
-  border-radius: 0px !important;\
-  border-style: solid !important;\
-  border-width: '+cs_border+'px 0px 0px 0px !important;\
+  border-radius: 0px 0px '+cs_border_radius+'px '+cs_border_radius+'px !important;\
 }\
 scrollbar[orient="vertical"] scrollbarbutton[type="increment"]:hover {\
   background-image: '+cs_button_image_vertical_increment+','+cs_gradient_vertical_hover+' !important;\
@@ -134,24 +137,18 @@ scrollbar[orient="horizontal"] scrollbarbutton {\
 }\
 scrollbar[orient="horizontal"] scrollbarbutton[type="decrement"] {\
   background-image: '+cs_button_image_horizontal_decrement+','+cs_gradient_horizontal+' !important;\
-  background-position: center,left top !important;\
+  background-position: center !important;\
   background-repeat: no-repeat,repeat !important;\
-  border-color: '+cs_border_color+' !important;\
-  border-radius: 0px !important;\
-  border-style: solid !important;\
-  border-width: 0px 0px '+cs_border+'px 0px !important;\
+  border-radius: '+cs_border_radius+'px 0px 0px '+cs_border_radius+'px !important;\
 }\
 scrollbar[orient="horizontal"] scrollbarbutton[type="decrement"]:hover {\
   background-image: '+cs_button_image_horizontal_decrement+','+cs_gradient_horizontal_hover+' !important;\
 }\
 scrollbar[orient="horizontal"] scrollbarbutton[type="increment"] {\
   background-image: '+cs_button_image_horizontal_increment+','+cs_gradient_horizontal+' !important;\
-  background-position: center,left top !important;\
+  background-position: center !important;\
   background-repeat: no-repeat,repeat !important;\
-  border-color: '+cs_border_color+' !important;\
-  border-radius: 0px !important;\
-  border-style: solid !important;\
-  border-width: '+cs_border+'px 0px 0px 0px !important;\
+  border-radius: 0px '+cs_border_radius+'px '+cs_border_radius+'px 0px !important;\
 }\
 scrollbar[orient="horizontal"] scrollbarbutton[type="increment"]:hover {\
   background-image: '+cs_button_image_horizontal_increment+','+cs_gradient_horizontal_hover+' !important;\
