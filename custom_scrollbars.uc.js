@@ -16,7 +16,7 @@ var cs_background_color = "#d6d4d2";
 var cs_corner_color = "#e8e7e5";
 var cs_width = 14;
 var cs_min_thumb_size = 16;
-var cs_button_length = 14;
+var cs_button_length = 15;
 var cs_thumb_image_vertical = "url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAYAAAAHCAYAAAArkDztAAAABmJLR0QA/wD/AP+gvaeTAAAAG0lEQVQI12PMyMhoY2BgqGRABe0MJANGOhgFAPm5CD5Gino4AAAAAElFTkSuQmCC)";
 var cs_thumb_image_horizontal = "url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAcAAAAGCAYAAAAPDoR2AAAABmJLR0QA/wD/AP+gvaeTAAAAJUlEQVQI12PIyMhoY4ACdDYTAwNDJQMCoLCZGPAAyiTbkfgobAAQ6AhFazuzRQAAAABJRU5ErkJggg==)";
 var cs_gradient_vertical = "linear-gradient(to right,#e8e8e8 0%,#dfdfdf 49%,#d9d9d9 50%,#cdcdcd 100%)";
